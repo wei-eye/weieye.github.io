@@ -1,219 +1,807 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wei-Eye – Adaptive Strategic AI System</title>
-  <meta name="description" content="Wei-Eye is a modular, reflexive AI execution engine powered by the SUS Framework. Think in loops, adapt in real time, scale across any domain.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap">
+  <meta name="description" content="Wei-Eye is a modular, reflexive AI execution engine powered by the SUS Framework. Think in loops, adapt in real time, scale across any domain." />
+  <meta property="og:title" content="Wei-Eye – Adaptive Strategic AI System" />
+  <meta property="og:description" content="Wei-Eye is a modular, reflexive AI execution engine powered by the SUS Framework." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://via.placeholder.com/800x400?text=Wei-Eye" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600;700&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --clr-bg: #f9fafb;
-      --clr-hero-bg: #ffffff;
-      --clr-accent: #3b82f6;
+      --clr-hero-bg: #fff;
+      --clr-black: #111216;
+      --clr-navy: #1a2233;
+      --clr-dark-gradient: linear-gradient(120deg, #111216 60%, #1a2233 100%);
+      --clr-dark-gradient-hero: linear-gradient(120deg, #181b22 60%, #232b3a 100%);
+      --clr-lightgrey: #f3f4f6;
+      --clr-accent: #222;
+      --clr-accent-dark: #111;
       --clr-text: #111827;
       --clr-muted: #6b7280;
-      --fw-normal: 400;
+      --clr-white: #fff;
+      --fw-thin: 100;
+      --fw-semi: 600;
       --fw-bold: 700;
-      --fs-base: 1rem;
-      --fs-lg: 1.25rem;
-      --fs-xl: 2rem;
-      --radius: 8px;
-      --gap: 2rem;
+      --fs-base: 1.05rem;
+      --fs-lg: 1.5rem;
+      --fs-xl: clamp(3.5rem, 8vw, 6rem);
+      --fs-h2: clamp(2.6rem, 6vw, 4.2rem);
+      --fs-h3: clamp(1.5rem, 3vw, 2.2rem);
+      --fs-table: 2.2rem;
+      --radius: 24px;
+      --gap: 3.5rem;
+      --section-pad: 7rem 0 6rem 0;
+      --transition: 0.3s cubic-bezier(.4,0,.2,1);
+      --shadow: 0 2px 24px rgba(0,0,0,0.04);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--clr-bg); color: var(--clr-text); line-height: 1.6; }
-    a { color: var(--clr-accent); text-decoration: none; }
-    .container { max-width: 960px; margin: auto; padding: var(--gap); }
-    header, section, footer { padding: var(--gap) 0; }
-    h1 { font-size: var(--fs-xl); font-weight: var(--fw-bold); }
-    h2 { font-size: var(--fs-lg); font-weight: var(--fw-bold); margin-bottom: .5em; }
-    p { font-size: var(--fs-base); margin-bottom: 1em; color: var(--clr-text); }
-    .btn { display: inline-block; padding: .75em 1.5em; background: var(--clr-accent); color: #fff; border-radius: var(--radius); font-weight: var(--fw-bold); transition: background .2s; }
-    .btn:hover { background: #2563eb; }
-    /* Layout Utilities */
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: var(--gap); }
-    .cards { gap: var(--gap); }
-    .card { background: #fff; padding: 1.5em; border-radius: var(--radius); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .table { width:100%; border-collapse: collapse; margin-top:1em; }
-    .table th, .table td { border:1px solid #e5e7eb; padding:.75em; text-align:center; }
-    .table th { background: #f3f4f6; }
-    /* Section Specific */
-    #hero { background: var(--clr-hero-bg); text-align: center; }
-    #hero p { font-size: var(--fs-lg); color: var(--clr-muted); }
-    #cta { text-align:center; }
-    footer { text-align:center; color: var(--clr-muted); font-size:.875rem; }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: var(--fw-thin);
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.7;
+      text-transform: lowercase;
+      letter-spacing: 0.01em;
+    }
+    main {
+      display: block;
+    }
+    /* Headings */
+    h1 {
+      font-family: Impact, 'Arial Narrow Bold', sans-serif;
+      text-transform: uppercase;
+      font-weight: var(--fw-bold);
+      letter-spacing: 0.08em;
+      font-size: var(--fs-xl);
+      margin-top: 0;
+      margin-bottom: 2.5rem;
+      line-height: 1.05;
+      color: var(--clr-navy);
+    }
+    .hero-montserrat {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: var(--fw-thin);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--clr-white);
+      text-transform: lowercase;
+      letter-spacing: 0.01em;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .hero-montserrat-small {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: var(--fw-thin);
+      font-size: 1.2rem;
+      color: var(--clr-muted);
+      text-transform: lowercase;
+      letter-spacing: 0.01em;
+      display: block;
+      margin-top: 5.5rem;
+      margin-bottom: 2.5rem;
+      max-width: 420px;
+    }
+    h2 {
+      font-family: Impact, 'Arial Narrow Bold', sans-serif;
+      text-transform: uppercase;
+      font-weight: var(--fw-bold);
+      letter-spacing: 0.04em;
+      font-size: clamp(3.2rem, 7vw, 4.8rem);
+      margin-top: 0;
+      margin-bottom: 0.6rem;
+      line-height: 1.1;
+      color: var(--clr-lightgrey);
+    }
+    .section-white h2 {
+      color: var(--clr-navy);
+    }
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-h3);
+      font-weight: 700;
+      text-transform: none;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.01em;
+      color: var(--clr-accent-dark);
+    }
+    .subheading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem;
+      font-weight: var(--fw-thin);
+      color: var(--clr-lightgrey);
+      margin-bottom: 0;
+      margin-top: 0.2rem;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      text-align: left;
+    }
+    .section-white .subheading {
+      color: var(--clr-muted);
+    }
+    p, li, td, th {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: var(--fw-thin);
+      font-size: var(--fs-base);
+      color: var(--clr-white);
+      text-transform: lowercase;
+      margin-bottom: 1.5em;
+      letter-spacing: 0.01em;
+    }
+    .section-white p, .section-white td, .section-white th {
+      color: var(--clr-black);
+    }
+    strong, .impact {
+      font-weight: var(--fw-bold);
+      color: #fff;
+      letter-spacing: 0.01em;
+      font-size: 1.18em;
+      background: none;
+    }
+    .section-white strong, .section-white .impact,
+    .capabilities.section-white strong, .capabilities.section-white .impact,
+    .table-wrap.section-white strong, .table-wrap.section-white .impact {
+      color: var(--clr-black);
+    }
+    .muted {
+      color: var(--clr-muted);
+    }
+    /* Navigation */
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2.5rem 1.5rem 2.5rem;
+      background: var(--clr-white);
+      border-bottom: 1px solid var(--clr-lightgrey);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo img {
+      height: 44px;
+      width: 44px;
+      border-radius: 50%;
+      background: var(--clr-lightgrey);
+      object-fit: cover;
+      margin-right: 0.7rem;
+    }
+    .logo-text {
+      font-family: Impact, 'Arial Narrow Bold', sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      color: var(--clr-accent-dark);
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropbtn {
+      background: none;
+      border: none;
+      color: var(--clr-accent-dark);
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      transition: color var(--transition);
+      outline: none;
+    }
+    .dropbtn:focus, .dropbtn:hover {
+      color: var(--clr-muted);
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 2.8rem;
+      background: var(--clr-white);
+      min-width: 180px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+      border-radius: var(--radius);
+      z-index: 1001;
+      padding: 1.2rem 0;
+    }
+    .dropdown-content a {
+      color: var(--clr-accent-dark);
+      padding: 1rem 2rem;
+      text-decoration: none;
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: var(--fw-thin);
+      text-transform: lowercase;
+      transition: background var(--transition), color var(--transition);
+      border-radius: 0;
+    }
+    .dropdown-content a:hover, .dropdown-content a:focus {
+      background: var(--clr-lightgrey);
+      color: var(--clr-accent-dark);
+    }
+    .dropdown.show .dropdown-content {
+      display: block;
+    }
+    /* Container & Section */
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 2.5rem;
+    }
+    section, header, footer {
+      padding: var(--section-pad);
+    }
+    section {
+      margin-bottom: 2.5rem;
+    }
+    /* Hero */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      background: var(--clr-dark-gradient-hero);
+      border-radius: var(--radius);
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+      margin-bottom: 3rem;
+      color: var(--clr-white);
+      border: 2px solid var(--clr-black);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content {
+      max-width: 700px;
+      margin-left: 6vw;
+      margin-right: auto;
+      padding-left: 0.5rem;
+    }
+    .hero .hero-montserrat {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--clr-white);
+      margin-bottom: 0.5rem;
+      margin-top: 0;
+      font-weight: var(--fw-thin);
+      letter-spacing: 0.01em;
+      line-height: 1.1;
+    }
+    .hero h1 {
+      color: var(--clr-white);
+      font-size: clamp(4.2rem, 10vw, 7rem);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.12em;
+      line-height: 1.05;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2em;
+    }
+    .hero-montserrat-small {
+      margin-top: 5.5rem;
+      margin-bottom: 2.5rem;
+      font-size: 1.2rem;
+      color: var(--clr-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: var(--fw-thin);
+      letter-spacing: 0.01em;
+      text-align: left;
+      max-width: 420px;
+    }
+    .hero .btn {
+      margin-top: 5.5rem;
+    }
+    /* Alternate Section Colors */
+    .section-black {
+      background: var(--clr-dark-gradient);
+      color: var(--clr-white);
+      border: 2px solid var(--clr-black);
+      border-radius: var(--radius);
+    }
+    .section-white {
+      background: var(--clr-white);
+      color: var(--clr-black);
+      border: 2px solid var(--clr-black);
+      border-radius: var(--radius);
+    }
+    /* Vertical Info Sections */
+    .vertical-section {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 4.5rem 3rem 4.5rem 3rem;
+      margin-bottom: 4rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .vertical-section:not(:last-child) {
+      margin-bottom: 5rem;
+    }
+    .vertical-section.section-black h2,
+    .vertical-section.section-black .subheading {
+      color: var(--clr-lightgrey);
+    }
+    .vertical-section.section-black p,
+    .vertical-section.section-black strong,
+    .vertical-section.section-black .impact {
+      color: #fff;
+    }
+    .vertical-section.section-white h2 {
+      color: var(--clr-navy);
+    }
+    .vertical-section.section-white p,
+    .vertical-section.section-white strong,
+    .vertical-section.section-white .impact {
+      color: var(--clr-black);
+    }
+    .vertical-section h2 {
+      font-size: clamp(3.2rem, 7vw, 4.8rem);
+      margin-bottom: 0.6rem;
+    }
+    .vertical-section .subheading {
+      margin-top: 0.2rem;
+      margin-bottom: 2.2rem;
+    }
+    /* Capabilities Section */
+    .capabilities {
+      background: var(--clr-white);
+      border-radius: var(--radius);
+      padding: 6rem 3rem 6rem 3rem;
+      margin-bottom: 5rem;
+      box-shadow: 0 4px 32px rgba(26,34,51,0.06);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--clr-black);
+    }
+    .capabilities::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      background: rgba(243,244,246,0.09);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .capabilities-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+      margin-top: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .capability {
+      margin-bottom: 0.5rem;
+      border-left: 6px solid var(--clr-navy);
+      padding-left: 2.2rem;
+      position: relative;
+    }
+    .capability-title {
+      font-family: Impact, 'Arial Narrow Bold', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3.7rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--clr-navy);
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+    }
+    .capability-desc {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.18rem;
+      font-weight: var(--fw-thin);
+      color: var(--clr-black);
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.01em;
+      max-width: 600px;
+    }
+    /* Table Section */
+    .table-wrap {
+      background: var(--clr-dark-gradient);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 3.5rem 2.5rem 3.5rem 2.5rem;
+      margin-bottom: 5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      border: 2px solid var(--clr-black);
+      color: var(--clr-white);
+    }
+    .table-header-story {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 2.2rem;
+      gap: 1.2rem;
+      max-width: 900px;
+    }
+    .table-header-story .story-line {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: var(--fw-thin);
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      color: var(--clr-white);
+      text-transform: none;
+      letter-spacing: 0.09em;
+      line-height: 1.08;
+      margin-bottom: 0;
+      width: 100%;
+      white-space: nowrap;
+    }
+    .table-header-story .story-focus {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: var(--fw-semi);
+      font-size: clamp(3.5rem, 10vw, 6rem);
+      color: var(--clr-white);
+      text-transform: none;
+      letter-spacing: 0.13em;
+      line-height: 1.05;
+      margin-left: 0;
+      width: 100%;
+      white-space: nowrap;
+    }
+    .table-header-story .story-focus.think {
+      color: var(--clr-lightgrey);
+      margin-left: 0;
+    }
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: var(--fs-table);
+      background: var(--clr-lightgrey);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+      margin-top: 2.5rem;
+    }
+    .table th, .table td {
+      padding: 1.3em 1.2em;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .table th {
+      background: var(--clr-white);
+      font-family: 'Inter', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--clr-black);
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    .table tr:last-child td {
+      border-bottom: none;
+    }
+    .table td {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.08rem;
+      font-weight: var(--fw-thin);
+      color: var(--clr-black);
+      background: var(--clr-lightgrey);
+    }
+    .table tr:nth-child(even) td {
+      background: #f7f7fa;
+    }
+    /* CTA */
+    .cta-section {
+      background: var(--clr-dark-gradient-hero);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 7rem 3rem 7rem 3rem;
+      margin-bottom: 4rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      color: var(--clr-white);
+      border: 2px solid var(--clr-black);
+    }
+    .cta-section h2 {
+      font-size: clamp(3.5rem, 8vw, 5.5rem);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.12em;
+      color: var(--clr-white);
+      text-align: left;
+      font-family: Impact, 'Arial Narrow Bold', sans-serif;
+      font-weight: var(--fw-bold);
+      text-transform: uppercase;
+    }
+    .cta-section p {
+      font-size: 1.35rem;
+      margin-bottom: 3.5rem;
+      color: var(--clr-lightgrey);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+    .cta-section .cta-bold {
+      font-weight: var(--fw-bold);
+      color: var(--clr-white);
+      font-size: 1.35rem;
+      letter-spacing: 0.01em;
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 1.2rem;
+      display: block;
+    }
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 1.1em 2.8em;
+      border: 2px solid var(--clr-white);
+      background: transparent;
+      color: var(--clr-white);
+      border-radius: var(--radius);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      font-weight: var(--fw-thin);
+      text-transform: lowercase;
+      letter-spacing: 0.07em;
+      margin: 2.5em 1em 0.5em 0;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+      outline: none;
+      text-decoration: none;
+    }
+    .btn:focus, .btn:hover {
+      background: var(--clr-black);
+      color: var(--clr-white);
+      border-color: var(--clr-white);
+      text-decoration: none;
+    }
+    /* Footer */
+    footer {
+      background: var(--clr-white);
+      color: var(--clr-muted);
+      text-align: center;
+      font-size: 1.05rem;
+      border-top: 1px solid #e5e7eb;
+      padding: 3rem 0 2rem 0;
+      margin-top: 4rem;
+    }
+    footer a {
+      color: var(--clr-accent-dark);
+      text-decoration: underline;
+      margin: 0 0.5em;
+      font-weight: var(--fw-bold);
+      text-transform: uppercase;
+      font-size: 1rem;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container { padding: 0 1.2rem; }
+      section, header, footer { padding: 3rem 0; }
+      .hero { padding-top: 4rem; padding-bottom: 4rem; }
+      .vertical-section, .capabilities, .cta-section, .table-wrap { padding: 2.5rem 1.2rem; }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.5rem; }
+      .capability-title { font-size: 1.3rem; }
+      .nav-wrap { flex-direction: column; align-items: flex-start; padding: 1rem 1rem; }
+      .logo-text { font-size: 1.3rem; }
+      .hero { padding-top: 2rem; padding-bottom: 2rem; }
+      .vertical-section, .capabilities, .cta-section, .table-wrap { padding: 1.2rem 0.5rem; }
+      .table-header-story .story-line { font-size: 1.2rem; }
+      .table-header-story .story-focus { font-size: 2rem; }
+      .table th { font-size: 1.1rem; }
+    }
   </style>
+  <script>
+    // Dropdown menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropdown = document.querySelector('.dropdown');
+      const dropbtn = document.querySelector('.dropbtn');
+      dropbtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+      });
+      document.addEventListener('click', function() {
+        dropdown.classList.remove('show');
+      });
+    });
+  </script>
 </head>
 <body>
-
-  <!-- HERO / TOP BANNER -->
-  <header id="hero">
-    <div class="container">
-      <h1>Unleash Strategic AI That Thinks Ahead</h1>
-      <p>Wei-Eye is an adaptive AI execution engine built on the SUS Framework—modular, reflexive, self-refining.</p>
-      <a href="#system" class="btn">Explore the System</a>
-      <a href="#cta" class="btn" style="margin-left:1em; background:#10b981;">Start Thinking Ahead</a>
+  <nav class="nav-wrap" role="navigation" aria-label="Main navigation">
+    <div class="logo">
+      <img src="https://via.placeholder.com/44x44?text=W" alt="Wei-Eye Logo" />
+      <span class="logo-text">wei-eye</span>
     </div>
-  </header>
-
-  <!-- PROBLEM → SOLUTION -->
-  <section id="problem-solution">
-    <div class="container grid-3">
-      <div class="card">
-        <h2>Most AI Waits for Prompts</h2>
-        <p>Static tools stall your momentum—no context, no foresight.</p>
-      </div>
-      <div class="card" style="grid-column:span 2;">
-        <h2>Wei-Eye Doesn’t Wait. It Decides.</h2>
-        <p>Built to reason forward, adapt in real time, and lead with strategic intent.</p>
+    <div class="dropdown">
+      <button class="dropbtn" aria-label="Open menu" aria-haspopup="true" aria-expanded="false">&#9776;</button>
+      <div class="dropdown-content" role="menu">
+        <a href="#hero" role="menuitem">home</a>
+        <a href="#how" role="menuitem">how it works</a>
+        <a href="#why" role="menuitem">why wei-eye</a>
+        <a href="#audience" role="menuitem">who it's for</a>
+        <a href="#capabilities" role="menuitem">capabilities</a>
+        <a href="#comparison" role="menuitem">comparison</a>
+        <a href="#cta" role="menuitem">activate</a>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <!-- SUS-POWERED CAPABILITIES -->
-  <section id="capabilities">
-    <div class="container">
-      <h2>SUS-Powered Capabilities</h2>
-      <div class="grid-3 cards">
-        <div class="card">
-          <h3>Thinks in Loops, Not Lines</h3>
-          <p>Recursive logic layers that evolve execution with every decision.</p>
+  <main id="main" tabindex="-1">
+    <header id="hero" class="hero section-black">
+      <div class="container hero-content">
+        <span class="hero-montserrat" style="font-size:clamp(2.1rem,5vw,3.2rem);">unleash</span>
+        <h1 style="font-size:clamp(4.2rem,10vw,7rem);margin-bottom:0.5rem;">adaptive intelligence</h1>
+        <div class="hero-montserrat-small">
+          modular reflexive self-evolving built for those who move first
         </div>
-        <div class="card">
-          <h3>Adapts in Real Time</h3>
-          <p>Dynamic recalibration of plans, logic, and responses on the fly.</p>
+        <a href="#cta" class="btn">get started</a>
+      </div>
+    </header>
+
+    <section id="how" class="vertical-section section-white">
+      <h2>how it works</h2>
+      <div class="subheading">from input to impact</div>
+      <br><br>
+      <p>
+        <strong>ingest.</strong> absorbs context, data, intent<br>
+        <strong>analyze.</strong> maps, models, prioritizes<br>
+        <strong>execute.</strong> deploys actions, measures results<br>
+        <strong>evolve.</strong> sharpens every cycle
+      </p>
+    </section>
+
+    <section id="why" class="vertical-section section-black">
+      <h2>why wei-eye</h2>
+      <div class="subheading">beyond automation</div>
+      <br><br>
+      <div style="display:flex; flex-direction:column; gap:0.2em;">
+        <div style="display:flex; flex-direction:row; align-items:flex-start;">
+          <span>most ai reacts&nbsp;</span>
+          <span style="min-width:5.5em; display:inline-block;">wei-eye anticipates</span>
         </div>
-        <div class="card">
-          <h3>Scales Across Contexts</h3>
-          <p>From creative to technical, Wei-Eye operates fluidly across domains.</p>
-        </div>
-        <div class="card">
-          <h3>Simulates Reflexive Strategy</h3>
-          <p>Runs recursive futures to forecast and choose optimal paths forward.</p>
-        </div>
-        <div class="card">
-          <h3>Remembers with Purpose</h3>
-          <p>Layered memory and priority awareness for long-term precision.</p>
-        </div>
-        <div class="card">
-          <h3>Executes with Intelligence</h3>
-          <p>Not reactive automation—this is self-optimizing decision logic.</p>
+        <div style="display:flex; flex-direction:row; align-items:flex-start;">
+          <span>traditional tools follow&nbsp;</span>
+          <span style="min-width:5.5em; display:inline-block;">wei-eye leads</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- WHY IT MATTERS -->
-  <section id="why-it-matters">
-    <div class="container">
-      <h2>Why It Matters</h2>
-      <p>You don’t need another assistant. You need a system that thinks. Wei-Eye fuels momentum, extends clarity, and becomes your second mind.</p>
-      <p>The future will be built by those who think ahead. Traditional AI reacts. Wei-Eye reasons forward.</p>
-    </div>
-  </section>
-
-  <!-- VISUAL SYSTEM LOGIC -->
-  <section id="system">
-    <div class="container">
-      <h2>How Wei-Eye Thinks</h2>
-      <p>From ingestion to execution and back through feedback, Wei-Eye’s SUS framework runs in a continuous, self-correcting loop.</p>
-      <div class="card">
-        <h3>Data Ingested. Context Modeled.</h3>
-        <h3>Refined Through Logic Trees.</h3>
-        <h3>Run Through Execution Engines.</h3>
-        <h3>Looped Through Strategic Feedback.</h3>
+      <div style="margin-top:2.5rem; margin-bottom:2.5rem; line-height:2;">
+        you get clarity momentum precision—not just answers
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- USE CASES -->
-  <section id="use-cases">
-    <div class="container">
-      <h2>Who It’s For</h2>
-      <div class="grid-3 cards">
-        <div class="card">
-          <h3>Strategists & Executives</h3>
-          <p>Run dynamic operations with intelligent oversight and foresight.</p>
-        </div>
-        <div class="card">
-          <h3>Creators & Builders</h3>
-          <p>Move faster, think wider, scale ideas with recursive AI.</p>
-        </div>
-        <div class="card">
-          <h3>AI Developers</h3>
-          <p>Deploy layered reasoning, memory modeling, and simulation logic.</p>
-        </div>
+    <section id="audience" class="vertical-section section-white">
+      <h2>who it's for</h2>
+      <div class="subheading">built for visionaries</div>
+      <br><br>
+      <p>
+        <strong>strategists</strong>—orchestrate complexity<br>
+        <strong>builders</strong>—scale ideas into systems<br>
+        <strong>operators</strong>—drive outcomes with adaptive logic
+      </p>
+      <div style="margin-top:2.5rem; margin-bottom:2.5rem; line-height:2; color:var(--clr-navy); font-weight:600;">
+        if you think ahead, wei-eye is your edge
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- COMPARISON VS TRADITIONAL AI -->
-  <section id="comparison">
-    <div class="container">
-      <h2>Wei-Eye vs. Traditional AI</h2>
-      <table class="table">
+    <section id="capabilities" class="capabilities section-black">
+      <div class="container">
+        <div class="capabilities-list">
+          <div class="capability">
+            <div class="capability-title">recursive thinking</div>
+            <div class="capability-desc">adapts with every cycle—never static always evolving</div>
+          </div>
+          <div class="capability">
+            <div class="capability-title">real-time adaptation</div>
+            <div class="capability-desc">responds instantly to change recalibrates on the fly</div>
+          </div>
+          <div class="capability">
+            <div class="capability-title">context mastery</div>
+            <div class="capability-desc">operates seamlessly across domains from creative to technical</div>
+          </div>
+          <div class="capability">
+            <div class="capability-title">strategic foresight</div>
+            <div class="capability-desc">simulates futures chooses optimal paths drives results</div>
+          </div>
+          <div class="capability">
+            <div class="capability-title">purposeful memory</div>
+            <div class="capability-desc">remembers what matters forgets what doesn't</div>
+          </div>
+          <div class="capability">
+            <div class="capability-title">intelligent execution</div>
+            <div class="capability-desc">acts with intent not just automation</div>
+          </div>
+        </div>
+        <!-- Decorative SVG element for extra design -->
+        <svg width="180" height="180" viewBox="0 0 180 180" fill="none" style="position:absolute;bottom:-60px;left:-60px;z-index:0;opacity:0.13;">
+          <circle cx="90" cy="90" r="90" fill="#f3f4f6"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="comparison" class="table-wrap section-white">
+      <div class="table-header-story">
+        <span class="story-line" style="color:var(--clr-navy);font-size:clamp(2.5rem,7vw,4.5rem);font-family:'Montserrat',sans-serif;font-weight:100;">your tools were built to</span>
+        <span class="story-focus" style="color:var(--clr-black);font-weight:600;">follow</span>
+        <span class="story-line" style="color:var(--clr-navy);font-size:clamp(2.5rem,7vw,4.5rem);font-family:'Montserrat',sans-serif;font-weight:100;margin-top:2.5rem;">we taught ours how to</span>
+        <span class="story-focus think" style="color:var(--clr-navy);font-weight:600;">think</span>
+      </div>
+      <table class="table" aria-label="Comparison table: Wei-Eye vs Traditional AI">
         <thead>
           <tr>
-            <th>Feature</th>
-            <th>Traditional AI</th>
-            <th>Wei-Eye</th>
+            <th style="border-radius: 16px 0 0 0; text-align:center;">approach</th>
+            <th style="text-align:center;">old world</th>
+            <th style="border-radius: 0 16px 0 0; text-align:center;">wei-eye</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Reactive Logic</td>
-            <td>✅</td>
-            <td>✅</td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">reactive logic</span></td>
+            <td style="text-align:center;">predictable</td>
+            <td style="text-align:center;">dynamic</td>
           </tr>
           <tr>
-            <td>Reflexive Reasoning</td>
-            <td>❌</td>
-            <td>✅</td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">reflexive reasoning</span></td>
+            <td style="text-align:center;"><span style="color:#bbb;">absent</span></td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">present</span></td>
           </tr>
           <tr>
-            <td>Layered Memory</td>
-            <td>❌</td>
-            <td>✅</td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">layered memory</span></td>
+            <td style="text-align:center;"><span style="color:#bbb;">limited</span></td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">deep</span></td>
           </tr>
           <tr>
-            <td>Context Shifting</td>
-            <td>❌</td>
-            <td>✅</td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">context shifting</span></td>
+            <td style="text-align:center;"><span style="color:#bbb;">rigid</span></td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">fluid</span></td>
           </tr>
           <tr>
-            <td>Execution Planning</td>
-            <td>❌</td>
-            <td>✅</td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">execution planning</span></td>
+            <td style="text-align:center;"><span style="color:#bbb;">linear</span></td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">strategic</span></td>
           </tr>
           <tr>
-            <td>Self-Optimization</td>
-            <td>❌</td>
-            <td>✅</td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">self-optimization</span></td>
+            <td style="text-align:center;"><span style="color:#bbb;">none</span></td>
+            <td style="text-align:center;"><span class="impact" style="color:var(--clr-black);">continuous</span></td>
           </tr>
         </tbody>
       </table>
-    </div>
-  </section>
+    </section>
 
-  <!-- FINAL CTA -->
-  <section id="cta">
+    <section id="cta" class="cta-section section-black">
+      <h2>
+        ready to<br>
+        activate
+      </h2>
+      <p>
+        step into the future.<br>
+        <span class="cta-bold">lead. adapt. win.</span>
+      </p>
+      <a href="#" class="btn">launch wei-eye</a>
+      <a href="#" class="btn">request access</a>
+    </section>
+  </main>
+  <footer role="contentinfo">
     <div class="container">
-      <h2>Ready to Think Ahead?</h2>
-      <p>Join the strategic AI movement. Deploy the system that thinks in loops and evolves with every cycle.</p>
-      <a href="#" class="btn">Launch Wei-Eye</a>
-      <a href="#" class="btn" style="background:#10b981; margin-left:1em;">Request Early Access</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>© 2025 Wei-Eye — Powered by the SUS Framework</p>
-      <p><a href="#privacy">Privacy</a> • <a href="#terms">Terms</a> • <a href="#contact">Contact</a></p>
+      <p>© 2025 wei-eye — powered by the sus framework</p>
+      <p>
+        <a href="#privacy">privacy</a> •
+        <a href="#terms">terms</a> •
+        <a href="#contact">contact</a>
+      </p>
     </div>
   </footer>
-
 </body>
 </html>
