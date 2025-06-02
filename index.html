@@ -2,121 +2,217 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Wei-Eye — Strategic AI Powered by the SUS Framework. Adaptive, recursive, and execution-ready.">
-  <title>Wei-Eye | Strategic AI</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wei-Eye – Adaptive Strategic AI System</title>
+  <meta name="description" content="Wei-Eye is a modular, reflexive AI execution engine powered by the SUS Framework. Think in loops, adapt in real time, scale across any domain.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap">
   <style>
-    body { margin: 0; font-family: 'Inter', sans-serif; background-color: #0f0f0f; color: #ffffff; }
-    header, section, footer { padding: 4rem 2rem; max-width: 1200px; margin: auto; }
-    h1, h2, h3 { color: #00f6ff; }
-    .hero { text-align: center; padding-top: 6rem; }
-    .cta-buttons a { display: inline-block; margin: 1rem; padding: 1rem 2rem; background: #00f6ff; color: #0f0f0f; font-weight: bold; border-radius: 8px; text-decoration: none; }
-    .tiles, .use-cases, .comparison-grid { display: grid; gap: 2rem; }
-    .tiles { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .tile { background: #1a1a1a; padding: 1.5rem; border-radius: 10px; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .comparison-grid { background: #1f1f1f; border-radius: 12px; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 1rem; text-align: center; border-bottom: 1px solid #333; }
-    th { background-color: #111; color: #00f6ff; }
-    footer { text-align: center; font-size: 0.9rem; color: #aaa; padding-bottom: 2rem; }
+    :root {
+      --clr-bg: #f9fafb;
+      --clr-hero-bg: #ffffff;
+      --clr-accent: #3b82f6;
+      --clr-text: #111827;
+      --clr-muted: #6b7280;
+      --fw-normal: 400;
+      --fw-bold: 700;
+      --fs-base: 1rem;
+      --fs-lg: 1.25rem;
+      --fs-xl: 2rem;
+      --radius: 8px;
+      --gap: 2rem;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--clr-bg); color: var(--clr-text); line-height: 1.6; }
+    a { color: var(--clr-accent); text-decoration: none; }
+    .container { max-width: 960px; margin: auto; padding: var(--gap); }
+    header, section, footer { padding: var(--gap) 0; }
+    h1 { font-size: var(--fs-xl); font-weight: var(--fw-bold); }
+    h2 { font-size: var(--fs-lg); font-weight: var(--fw-bold); margin-bottom: .5em; }
+    p { font-size: var(--fs-base); margin-bottom: 1em; color: var(--clr-text); }
+    .btn { display: inline-block; padding: .75em 1.5em; background: var(--clr-accent); color: #fff; border-radius: var(--radius); font-weight: var(--fw-bold); transition: background .2s; }
+    .btn:hover { background: #2563eb; }
+    /* Layout Utilities */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: var(--gap); }
+    .cards { gap: var(--gap); }
+    .card { background: #fff; padding: 1.5em; border-radius: var(--radius); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .table { width:100%; border-collapse: collapse; margin-top:1em; }
+    .table th, .table td { border:1px solid #e5e7eb; padding:.75em; text-align:center; }
+    .table th { background: #f3f4f6; }
+    /* Section Specific */
+    #hero { background: var(--clr-hero-bg); text-align: center; }
+    #hero p { font-size: var(--fs-lg); color: var(--clr-muted); }
+    #cta { text-align:center; }
+    footer { text-align:center; color: var(--clr-muted); font-size:.875rem; }
   </style>
 </head>
 <body>
 
-  <header class="hero">
-    <h1>Unleash Adaptive AI Intelligence</h1>
-    <p>Powered by the SUS Framework. Designed to evolve, reason, and scale with intent.</p>
-    <div class="cta-buttons">
-      <a href="#system">Explore the System</a>
-      <a href="#cta">See It in Action</a>
+  <!-- HERO / TOP BANNER -->
+  <header id="hero">
+    <div class="container">
+      <h1>Unleash Strategic AI That Thinks Ahead</h1>
+      <p>Wei-Eye is an adaptive AI execution engine built on the SUS Framework—modular, reflexive, self-refining.</p>
+      <a href="#system" class="btn">Explore the System</a>
+      <a href="#cta" class="btn" style="margin-left:1em; background:#10b981;">Start Thinking Ahead</a>
     </div>
   </header>
 
-  <section>
-    <h2>Most AI is Static</h2>
-    <p>Reactive. Prompt-bound. Blind to context.</p>
-    <h3>Wei-Eye is Different</h3>
-    <p>It evolves. It reasons forward. It executes with strategic clarity.</p>
-    <p><em>Your tools follow prompts. Wei-Eye builds decisions.</em></p>
+  <!-- PROBLEM → SOLUTION -->
+  <section id="problem-solution">
+    <div class="container grid-3">
+      <div class="card">
+        <h2>Most AI Waits for Prompts</h2>
+        <p>Static tools stall your momentum—no context, no foresight.</p>
+      </div>
+      <div class="card" style="grid-column:span 2;">
+        <h2>Wei-Eye Doesn’t Wait. It Decides.</h2>
+        <p>Built to reason forward, adapt in real time, and lead with strategic intent.</p>
+      </div>
+    </div>
   </section>
 
+  <!-- SUS-POWERED CAPABILITIES -->
+  <section id="capabilities">
+    <div class="container">
+      <h2>SUS-Powered Capabilities</h2>
+      <div class="grid-3 cards">
+        <div class="card">
+          <h3>Thinks in Loops, Not Lines</h3>
+          <p>Recursive logic layers that evolve execution with every decision.</p>
+        </div>
+        <div class="card">
+          <h3>Adapts in Real Time</h3>
+          <p>Dynamic recalibration of plans, logic, and responses on the fly.</p>
+        </div>
+        <div class="card">
+          <h3>Scales Across Contexts</h3>
+          <p>From creative to technical, Wei-Eye operates fluidly across domains.</p>
+        </div>
+        <div class="card">
+          <h3>Simulates Reflexive Strategy</h3>
+          <p>Runs recursive futures to forecast and choose optimal paths forward.</p>
+        </div>
+        <div class="card">
+          <h3>Remembers with Purpose</h3>
+          <p>Layered memory and priority awareness for long-term precision.</p>
+        </div>
+        <div class="card">
+          <h3>Executes with Intelligence</h3>
+          <p>Not reactive automation—this is self-optimizing decision logic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS -->
+  <section id="why-it-matters">
+    <div class="container">
+      <h2>Why It Matters</h2>
+      <p>You don’t need another assistant. You need a system that thinks. Wei-Eye fuels momentum, extends clarity, and becomes your second mind.</p>
+      <p>The future will be built by those who think ahead. Traditional AI reacts. Wei-Eye reasons forward.</p>
+    </div>
+  </section>
+
+  <!-- VISUAL SYSTEM LOGIC -->
   <section id="system">
-    <h2>SUS-Powered Capabilities</h2>
-    <div class="tiles">
-      <div class="tile">
-        <h3>Thinks in Loops, Not Lines</h3>
-        <p>Recursive logic layers evolve execution with every decision.</p>
-      </div>
-      <div class="tile">
-        <h3>Adapts in Real Time</h3>
-        <p>Dynamic logic updates without human micromanagement.</p>
-      </div>
-      <div class="tile">
-        <h3>Scales Across Contexts</h3>
-        <p>From creative to technical, Wei-Eye operates fluidly across domains.</p>
-      </div>
-      <div class="tile">
-        <h3>Executes with Intelligence</h3>
-        <p>Runs decision engines—not automation scripts.</p>
+    <div class="container">
+      <h2>How Wei-Eye Thinks</h2>
+      <p>From ingestion to execution and back through feedback, Wei-Eye’s SUS framework runs in a continuous, self-correcting loop.</p>
+      <div class="card">
+        <h3>Data Ingested. Context Modeled.</h3>
+        <h3>Refined Through Logic Trees.</h3>
+        <h3>Run Through Execution Engines.</h3>
+        <h3>Looped Through Strategic Feedback.</h3>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>Use Cases</h2>
-    <div class="tiles use-cases">
-      <div class="tile">
-        <h3>Creative Execution</h3>
-        <p>Launch ideas at velocity with layered reasoning.</p>
-      </div>
-      <div class="tile">
-        <h3>Operational Intelligence</h3>
-        <p>Orchestrate systems with reflexive clarity.</p>
-      </div>
-      <div class="tile">
-        <h3>Simulation Deployment</h3>
-        <p>Model dynamic futures before they happen.</p>
+  <!-- USE CASES -->
+  <section id="use-cases">
+    <div class="container">
+      <h2>Who It’s For</h2>
+      <div class="grid-3 cards">
+        <div class="card">
+          <h3>Strategists & Executives</h3>
+          <p>Run dynamic operations with intelligent oversight and foresight.</p>
+        </div>
+        <div class="card">
+          <h3>Creators & Builders</h3>
+          <p>Move faster, think wider, scale ideas with recursive AI.</p>
+        </div>
+        <div class="card">
+          <h3>AI Developers</h3>
+          <p>Deploy layered reasoning, memory modeling, and simulation logic.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>Wei-Eye Isn’t a Tool. It’s a Thinking System.</h2>
-    <p>It powers recursive cognition, strategic foresight, and real-time momentum orchestration.</p>
-  </section>
-
-  <section>
-    <h2>Why Wei-Eye?</h2>
-    <div class="comparison-grid">
-      <table>
+  <!-- COMPARISON VS TRADITIONAL AI -->
+  <section id="comparison">
+    <div class="container">
+      <h2>Wei-Eye vs. Traditional AI</h2>
+      <table class="table">
         <thead>
-          <tr><th>Feature</th><th>Traditional AI</th><th>Wei-Eye</th></tr>
+          <tr>
+            <th>Feature</th>
+            <th>Traditional AI</th>
+            <th>Wei-Eye</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td>Reactive Logic</td><td>✅</td><td>✅</td></tr>
-          <tr><td>Reflexive Reasoning</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Layered Memory</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Context Shifting</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Execution Planning</td><td>❌</td><td>✅</td></tr>
-          <tr><td>Self-Optimization</td><td>❌</td><td>✅</td></tr>
+          <tr>
+            <td>Reactive Logic</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Reflexive Reasoning</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Layered Memory</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Context Shifting</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Execution Planning</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Self-Optimization</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
         </tbody>
       </table>
     </div>
   </section>
 
+  <!-- FINAL CTA -->
   <section id="cta">
-    <h2>Ready to Think Ahead?</h2>
-    <p>Step beyond reactive tools. Activate strategic execution.</p>
-    <div class="cta-buttons">
-      <a href="#">Activate Wei-Eye</a>
-      <a href="#">Request Early Access</a>
+    <div class="container">
+      <h2>Ready to Think Ahead?</h2>
+      <p>Join the strategic AI movement. Deploy the system that thinks in loops and evolves with every cycle.</p>
+      <a href="#" class="btn">Launch Wei-Eye</a>
+      <a href="#" class="btn" style="background:#10b981; margin-left:1em;">Request Early Access</a>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    &copy; 2025 Wei-Eye | Built with the SUS Framework | <a href="https://weieye.dev" style="color: #00f6ff; text-decoration: none;">weieye.dev</a>
+    <div class="container">
+      <p>© 2025 Wei-Eye — Powered by the SUS Framework</p>
+      <p><a href="#privacy">Privacy</a> • <a href="#terms">Terms</a> • <a href="#contact">Contact</a></p>
+    </div>
   </footer>
 
 </body>
